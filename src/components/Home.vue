@@ -50,12 +50,12 @@
             margin-right: auto;
             left: 0;
             right: 0;
-            text-align: center;
-          "
+            text-align: center;"
         >
-          <v-btn text>
-            <v-icon>mdi-logout</v-icon>
-          </v-btn>
+        <v-btn text @click="logout()">
+              <v-icon>mdi-logout</v-icon>
+              <v-icon class="text-caption ms-2">Logout</v-icon>
+            </v-btn>
         </div>
       </v-navigation-drawer>
     </nav>
@@ -118,7 +118,7 @@
             >
               <!-- <span class="white--text text-h5">JD</span> -->
               <img
-        src="https://cdn.vuetifyjs.com/images/john.jpg"
+              :src="getuserData.image !=='' ? getuserData.image : `https://www.w3schools.com/howto/img_avatar.png`"
         alt="John"
       >
             </v-avatar>
@@ -131,19 +131,20 @@
                 color="brown"
               >
               <img
-        src="https://cdn.vuetifyjs.com/images/john.jpg"
+              :src="getuserData.image !=='' ? getuserData.image : `https://www.w3schools.com/howto/img_avatar.png`"
         alt="John"
       >
               </v-avatar>
-              <h3 class="mt-1">Full Name</h3>
-              <p class="text-caption mt-1">
-                Email
+              <h3 class="mt-1 text-uppercase">{{ getuserData.userName }}</h3>
+              <p class="text-caption text-lowercase mt-1">
+                {{ getuserData.email }}
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
                 depressed
                 rounded
                 text
+                @click="updateUser()"
               >
                 Edit Details
               </v-btn>
@@ -152,6 +153,7 @@
                 depressed
                 rounded
                 text
+                @click="logout()"
               >
                 LogOut
               </v-btn>
@@ -216,6 +218,15 @@
 <script>
   export default {
     name: 'DashBoard',
+    methods:{
+      logout() {
+      localStorage.clear();
+      this.$router.push("/");
+    },
+    updateUser() {
+      this.$router.push("/home/update-user");
+    },
+    },
 
 data: () => ({
     selectedItem: 0,
@@ -229,6 +240,11 @@ data: () => ({
       { icon: "mdi-apple", text: "Matchability" },
     ],
   }),
+  computed:{
+      getuserData(){
+        return this.$store.state.userData
+      }
+    }
    
   }
 </script>

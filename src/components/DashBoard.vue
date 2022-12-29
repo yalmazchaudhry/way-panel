@@ -23,9 +23,11 @@
        <v-card>
          <v-row>
            <v-col class="col-md-2"><v-img 
-             src="https://cdn.vuetifyjs.com/images/john.jpg"
+             
+            :src="getuserData.image !=='' ? getuserData.image : `https://www.w3schools.com/howto/img_avatar.png`"
              alt=""
-             max-width="100px"
+             max-width="200px"
+             contain
              class="rounded mx-md-2 mx-4">
            </v-img>
          </v-col>
@@ -33,8 +35,8 @@
              
              <div class="d-flex flex-md-row flex-column ma-md-0 mx-2 justify-space-between">
              <div>
-               <h1 class="purple--text" >John Fernandiz</h1>
-               <p class="text-caption">Senior Software Engineer, Google</p>
+               <h1 class="purple--text text-uppercase" >{{ this.$store.state.userData.userName }}</h1>
+               <p class="text-caption text-lowercase">{{this.$store.state.userData.email}}</p>
              </div>
              <div class="d-flex flex-row">
                <v-btn
@@ -276,3 +278,14 @@
      </v-card>
                </v-col>
              </v-row></div></template>
+
+<script>
+export default {
+    name: 'DashBoard',
+    computed:{
+      getuserData(){
+        return this.$store.state.userData
+      }
+    }
+    }
+</script>

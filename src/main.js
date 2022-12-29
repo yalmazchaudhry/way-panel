@@ -15,17 +15,17 @@ const router = new VueRouter({
   mode: "history",
 });
 
-router.beforeEach((to, from, next) => {
-  if (
-    to.name !== "SignIn" &&
-    to.name !== "SignUp" &&
-    to.name !== "ForgetPassword" &&
-    to.name !== "ResetPassword" &&
-    !localStorage.getItem("token")
-  )
-    next({ name: "SignIn" });
-  else next();
-});
+// router.beforeEach((to, from, next) => {
+//   if (
+//     to.name !== "SignIn" &&
+//     to.name !== "SignUp" &&
+//     to.name !== "ForgetPassword" &&
+//     to.name !== "ResetPassword" &&
+//     !localStorage.getItem("token")
+//   )
+//     next({ name: "SignIn" });
+//   else next();
+// });
 
 new Vue({
   vuetify,

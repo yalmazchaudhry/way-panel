@@ -4,31 +4,34 @@ import Home from "./components/Home";
 import DashBoard from "./components/DashBoard";
 import ForgetPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
+import UpdateUser from "./components/UpdateUser";
+
+function gaurd(to, from, next) {
+  if (localStorage.getItem("token")) {
+    next();
+  } else {
+    next({ name: "SignIn" });
+  }
+}
 
 export default [
   {
     name: "Home",
     component: Home,
     path: "/home",
+    beforeEnter: gaurd,
     children: [
       {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
         path: "dashboard",
         component: DashBoard,
+        beforeEnter: gaurd,
       },
-      //   {
-      //     // UserPosts will be rendered inside User's <router-view>
-      //     // when /user/:id/posts is matched
-      //     path: "update-user",
-      //     component: UpdateUser,
-      //   },
+      {
+        path: "update-user",
+        component: UpdateUser,
+        beforeEnter: gaurd,
+      },
     ],
-    // beforeEnter: (to, from, next) => {
-    //   if (to.name !== "SignIn" && !localStorage.getItem("token"))
-    //     next({ name: "SignIn" });
-    //   else next();
-    // },
   },
 
   {

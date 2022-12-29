@@ -16,7 +16,7 @@
                         <v-row justify="space-between">
                             <v-col>
                                 <v-btn color="#48126A" id="button-signin">
-                                    <router-link    to="/reset-password" class="text-decoration-none">Reset Password</router-link> 
+                                    <router-link    to="/reset-password" class="white--text text-decoration-none">Reset Password</router-link> 
                                     </v-btn>
                             </v-col>
 
